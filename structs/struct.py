@@ -1,0 +1,3 @@
+ 
+class lol:
+    a = "lol"
