@@ -14,6 +14,7 @@ class RequestType(str, Enum):
 
 class Metadata(BaseModel):
     author: str
+    variation_ui_fields: bool
     simplified_interface: bool
     requested_at: datetime
     custom_metadata: dict
