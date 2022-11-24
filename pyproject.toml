@@ -2,12 +2,13 @@
 name = "structs"
 version = "0.0.1"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Kanonade <93012519+kanonade@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
 pydantic = "^1.10.2"
+flake8-pyproject = "^1.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.10.0"
@@ -17,3 +18,15 @@ flake8 = "^5.0.4"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+max-line-length = 100
+count = true
+exclude = [".venv"]
+extend-ignore = "E203"
