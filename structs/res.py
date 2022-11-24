@@ -24,9 +24,7 @@ class Response(Request):
     ] = None  # TODO: where is the error created? We may need another class for this
 
     @classmethod
-    def from_request(
-        cls, req: Request, info: dict, images: list, grid_images: bool, tensors: list
-    ):
+    def from_request(cls, req: Request, info: dict, images: list, grid_images: bool, tensors: list):
         """
         Create a response from a request and info dict
 
