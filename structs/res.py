@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import Field
 
@@ -15,13 +15,11 @@ class ResponseMetadata(Metadata):
 class Response(Request):
     metadata: ResponseMetadata
 
-    # Todo list of what?
-    images: list
+    images: List[str]
     grid_images: Optional[bool]
     tensors: list
-    error: Optional[
-        str
-    ] = None  # TODO: where is the error created? We may need another class for this
+    # TODO: where is the error created? We may need another class for this
+    error: Optional[str] = None  
 
     @classmethod
     def from_request(cls, req: Request, info: dict, images: list, grid_images: bool, tensors: list):
