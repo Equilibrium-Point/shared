@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-
+from typing import List
 from structs.common import Metadata, Params, RequestType
 
 
@@ -12,3 +12,9 @@ class Request(BaseModel):
 
     params: Params
     metadata: Metadata
+
+
+class UpscaleRequest(Request):
+    request_type: RequestType = RequestType.UPSCALE_REQUEST_TYPE
+
+    images: List[str]

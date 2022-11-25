@@ -32,7 +32,6 @@ class Params(BaseModel):
     sampler: str
     grid: bool
     restore_faces: bool
-    image: Optional[str]
     upscale: bool
     count: int
     seed: int

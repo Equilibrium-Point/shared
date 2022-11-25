@@ -16,13 +16,13 @@ class Response(Request):
     metadata: ResponseMetadata
 
     images: List[str]
-    grid_images: Optional[bool]
+    grid_images: Optional[str]
     tensors: list
     # TODO: where is the error created? We may need another class for this
     error: Optional[str] = None  
 
     @classmethod
-    def from_request(cls, req: Request, info: dict, images: list, grid_images: bool, tensors: list):
+    def from_request(cls, req: Request, info: dict, images: list, tensors: list, grid_images: Optional[str] = None, error: Optional[str] = None):
         """
         Create a response from a request and info dict
 
@@ -33,11 +33,11 @@ class Response(Request):
         fields = req.dict()
 
         params = fields.pop("params")
-        params["seed"] = info["seed"] 
-        params["variation_seed"] = info["subseed"]
+        params["seed"] = info.get("seed", 0)
+        params["variation_seed"] = info.get("subseed", 0)
 
         meta_data = fields.pop("metadata")
-        meta_data["token_count"] = info["token_count"]
+        meta_data["token_count"] = info.get("token_count", 0)
 
         return cls(
             **fields,
@@ -46,6 +46,7 @@ class Response(Request):
             tensors=tensors,
             params=params,
             metadata=ResponseMetadata(**meta_data),
+            error=error
         )
 
     @classmethod
