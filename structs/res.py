@@ -60,6 +60,7 @@ class Response(Request):
         """
         fields = req.dict()
 
+        fields.pop("images")
         meta_data = fields.pop("metadata")
         meta_data["token_count"] = 0    # Not used in upscale request
 
