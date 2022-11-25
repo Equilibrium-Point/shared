@@ -33,7 +33,7 @@ class Response(Request):
         fields = req.dict()
 
         params = fields.pop("params")
-        params["seed"] = info["seed"]
+        params["seed"] = info["seed"] 
         params["variation_seed"] = info["subseed"]
 
         meta_data = fields.pop("metadata")
@@ -46,4 +46,26 @@ class Response(Request):
             tensors=tensors,
             params=params,
             metadata=ResponseMetadata(**meta_data),
+        )
+
+    @classmethod
+    def from_upscale_request(cls, req: Request, images: list, tensors: list, error: Optional[str] = None):
+        """
+        Create a response from a request and info dict
+
+        Args:
+            req (Request): a request
+            info (dict): a dict containing info about the generation
+        """
+        fields = req.dict()
+
+        meta_data = fields.pop("metadata")
+        meta_data["token_count"] = 0    # Not used in upscale request
+
+        return cls(
+            **fields,
+            images=images,
+            tensors=tensors,
+            metadata=ResponseMetadata(**meta_data),
+            error=error,
         )
