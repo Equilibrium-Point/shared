@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "structs"
-version = "0.0.1"
+version = "0.1.0"
 description = ""
 authors = ["Kanonade <93012519+kanonade@users.noreply.github.com>"]
 readme = "README.md"
