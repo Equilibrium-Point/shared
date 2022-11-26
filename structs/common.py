@@ -38,4 +38,4 @@ class Params(BaseModel):
     seed: int
     variation_seed: int
     override_tensor: Optional[str]
-    variation_strength: int
+    variation_strength: float
