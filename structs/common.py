@@ -18,6 +18,7 @@ class Metadata(BaseModel):
     simplified_interface: bool
     requested_at: datetime
     custom_metadata: dict
+    metrics: dict = {}
 
 
 class Params(BaseModel):

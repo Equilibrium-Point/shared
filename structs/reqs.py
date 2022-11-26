@@ -1,9 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List
 from structs.common import Metadata, Params, RequestType
-
+from uuid import UUID, uuid4
 
 class Request(BaseModel):
+    id: UUID = Field(default_factory=uuid4)
     request_type: RequestType
     user_tag: str
     user_id: int
