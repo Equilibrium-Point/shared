@@ -44,7 +44,7 @@ def bigprint(msg: str, margin: int=1, **kwargs):
     """
     print(boxpad(boxpad(msg, **{**kwargs, "char":' ', "padding":margin}), **{**kwargs, "char":'#'}))
 
-def beeeeeegprint(msg: str, layers: int=3, **kwargs):
+def biggerprint(msg: str, layers: int=3, **kwargs):
     """
     Print a veeeery big padded string with multiple fancy layers :D
 
