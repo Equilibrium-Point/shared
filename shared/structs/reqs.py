@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import List
-from structs.common import Metadata, Params, RequestType
+from shared.structs.common import Metadata, Params, RequestType
 from uuid import UUID, uuid4
 
 class Request(BaseModel):

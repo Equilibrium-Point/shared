@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "structs"
-version = "0.1.0"
+name = "shared"
+version = "0.3.0"
 description = ""
 authors = ["Kanonade <93012519+kanonade@users.noreply.github.com>"]
 readme = "README.md"
@@ -8,12 +8,12 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 pydantic = "^1.10.2"
-flake8-pyproject = "^1.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.10.0"
 isort = "^5.10.1"
 flake8 = "^5.0.4"
+flake8-pyproject = "^1.2.0"
 
 [build-system]
 requires = ["poetry-core"]

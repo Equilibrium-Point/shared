@@ -3,8 +3,8 @@ from typing import Optional, List
 
 from pydantic import Field
 
-from structs.common import Metadata
-from structs.reqs import Request
+from shared.structs.common import Metadata
+from shared.structs.reqs import Request
 
 
 class ResponseMetadata(Metadata):
