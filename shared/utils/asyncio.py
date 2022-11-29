@@ -1,5 +1,6 @@
 from asyncio import new_event_loop
 
+
 def syncable(func):
     """
     Decorator for an asynchronous function that allows it to be run synchronously,
