@@ -1,7 +1,11 @@
-from pydantic import BaseModel, Field
-from typing import List
-from shared.structs.common import Metadata, Params, RequestType
+from datetime import datetime
+from typing import List, Optional
 from uuid import UUID, uuid4
+
+from pydantic import BaseModel, Field
+
+from shared.structs.common import Metadata, Params, RequestType
+
 
 class Request(BaseModel):
     id: UUID = Field(default_factory=uuid4)
@@ -13,6 +17,17 @@ class Request(BaseModel):
 
     params: Params
     metadata: Metadata
+
+    def add_timestamp(self, moment_name: str, time: Optional[datetime] = None):
+        """Adds a timestamp to the request, with the current time if no time is provided
+
+        Args:
+            moment_name (str): The name of the moment to add
+            time (Optional[datetime]): the timestamp to add. Now if not specified
+        """
+        time = time or datetime.utcnow()
+        self.metadata.metrics[moment_name] = time.timestamp()
+
 
 class UpscaleRequest(Request):
     request_type: RequestType = RequestType.UPSCALE_REQUEST_TYPE

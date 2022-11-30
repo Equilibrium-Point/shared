@@ -1,5 +1,5 @@
-from pprint import pprint
 from functools import reduce
+from pprint import pprint
 
 """
 Shorten values of a dict to a maximum length
@@ -21,7 +21,8 @@ shorten_all = (
     else body
 )
 
-def shprint(obj: dict, maxlen: int=1024):
+
+def shprint(obj: dict, maxlen: int = 1024):
     """
     Pretty-print a dict, keeping all the values shortened to a
     maximum length, so that they don't dominate the visual output
@@ -32,7 +33,8 @@ def shprint(obj: dict, maxlen: int=1024):
     """
     pprint(shorten_all(obj, maxlen))
 
-def bigprint(msg: str, margin: int=1, **kwargs):
+
+def bigprint(msg: str, margin: int = 1, **kwargs):
     """
     Print a big string padded with a box :)
 
@@ -42,9 +44,12 @@ def bigprint(msg: str, margin: int=1, **kwargs):
         **kwargs: all additional kwargs are passed directly to boxpad(),
             refer to the doc for that function for additional info
     """
-    print(boxpad(boxpad(msg, **{**kwargs, "char":' ', "padding":margin}), **{**kwargs, "char":'#'}))
+    print(
+        boxpad(boxpad(msg, **{**kwargs, "char": " ", "padding": margin}), **{**kwargs, "char": "#"})
+    )
 
-def biggerprint(msg: str, layers: int=3, **kwargs):
+
+def biggerprint(msg: str, layers: int = 3, **kwargs):
     """
     Print a veeeery big padded string with multiple fancy layers :D
 
@@ -54,13 +59,24 @@ def biggerprint(msg: str, layers: int=3, **kwargs):
         **kwargs: all additional kwargs are passed directly to boxpad(),
             refer to the doc for that function for additional info
     """
-    print(reduce((lambda s, v: boxpad(s, **{**kwargs, 'char':' ' if v % 2 == 0 else kwargs.get('char', '#')})), range(layers), msg))
+    print(
+        reduce(
+            (
+                lambda s, v: boxpad(
+                    s, **{**kwargs, "char": " " if v % 2 == 0 else kwargs.get("char", "#")}
+                )
+            ),
+            range(layers),
+            msg,
+        )
+    )
+
 
 # i leave this here for patchy's amusement :p
 # boxpad = lambda msg, padding=1, char='#', double_width=True: (lambda hp, wp: (lambda lines: (lambda mlen: (lambda p_str: (lambda padded_lines: (lambda core: p_str + core + p_str)('\n'.join(padded_lines) + '\n'))((f"{char*wp}{ln.ljust(mlen, ' ')}{char*wp}" for ln in lines)))((char*(wp*2 + mlen) + '\n')*hp))(max(len(m) for m in lines)))(msg.split("\n")))(padding, padding*2 if double_width else padding)[:-1]
-def boxpad(msg: str, padding: int=1, char: str="#", double_width: bool=True):
+def boxpad(msg: str, padding: int = 1, char: str = "#", double_width: bool = True):
     """
-    Pad a string with a biiiigggg box around it to make it easier to 
+    Pad a string with a biiiigggg box around it to make it easier to
     catch in the middle of a bunch of console output :p
 
     Args:
@@ -72,11 +88,11 @@ def boxpad(msg: str, padding: int=1, char: str="#", double_width: bool=True):
     Returns:
         str: the newly padded string
     """
-    hp, wp = padding, padding*2 if double_width else padding
+    hp, wp = padding, padding * 2 if double_width else padding
     lines = msg.split("\n")
     mlen = max(len(m) for m in lines)
-    p_str = (char*(wp*2 + mlen) + '\n')*hp
+    p_str = (char * (wp * 2 + mlen) + "\n") * hp
     padded_lines = (f"{char*wp}{ln.ljust(mlen, ' ')}{char*wp}" for ln in lines)
-    core = '\n'.join(padded_lines) + '\n'
+    core = "\n".join(padded_lines) + "\n"
     full = p_str + core + p_str
     return full[:-1]

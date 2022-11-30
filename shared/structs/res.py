@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional, List
+from typing import List, Optional
 
 from pydantic import Field
 
@@ -19,10 +19,18 @@ class Response(Request):
     grid_image: Optional[str]
     tensors: list
     # TODO: where is the error created? We may need another class for this
-    error: Optional[str] = None  
+    error: Optional[str] = None
 
     @classmethod
-    def from_request(cls, req: Request, info: dict, images: list, tensors: list, grid_image: Optional[str] = None, error: Optional[str] = None):
+    def from_request(
+        cls,
+        req: Request,
+        info: dict,
+        images: list,
+        tensors: list,
+        grid_image: Optional[str] = None,
+        error: Optional[str] = None,
+    ):
         """
         Create a response from a request and info dict
 
@@ -46,11 +54,13 @@ class Response(Request):
             tensors=tensors,
             params=params,
             metadata=ResponseMetadata(**meta_data),
-            error=error
+            error=error,
         )
 
     @classmethod
-    def from_upscale_request(cls, req: Request, images: list, tensors: list, error: Optional[str] = None):
+    def from_upscale_request(
+        cls, req: Request, images: list, tensors: list, error: Optional[str] = None
+    ):
         """
         Create a response from a request and info dict
 
@@ -62,7 +72,7 @@ class Response(Request):
 
         fields.pop("images")
         meta_data = fields.pop("metadata")
-        meta_data["token_count"] = 0    # Not used in upscale request
+        meta_data["token_count"] = 0  # Not used in upscale request
 
         return cls(
             **fields,
