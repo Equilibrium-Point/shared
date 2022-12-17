@@ -39,3 +39,4 @@ class Params(BaseModel):
     variation_seed: int
     override_tensor: Optional[str]
     variation_strength: float
+    parameters_in_pnginfo: bool
